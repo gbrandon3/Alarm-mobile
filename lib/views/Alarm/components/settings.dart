@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+import '../../../model/alarm.dart';
+
 class Settings extends StatelessWidget {
+  Ajuste ajuste;
+  Settings({required this.ajuste});
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -20,19 +24,19 @@ class Settings extends StatelessWidget {
               child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: [Text("Notificar antes"), Text("15 min")],
+            children: [Text("Notificar antes"), Text(ajuste.notificarAntes)],
           )),
           Expanded(
               child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: [Text("Notificar antes"), Text("15 min")],
+            children: [Text("Recordar Cada"), Text(ajuste.notificarCada)],
           )),
           Expanded(
               child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: [Text("Notificar antes"), Text("15 min")],
+            children: [Text("Sonido"), Text(ajuste.sonido)],
           ))
         ],
       ),

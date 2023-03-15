@@ -12,3 +12,8 @@ class EditAlarm extends AlarmEvent {}
 class DeleteAlarm extends AlarmEvent {}
 
 class DetailAlarm extends AlarmEvent {}
+
+class SaveAlarm extends AlarmEvent {
+  Alarm alarm;
+  SaveAlarm(this.alarm);
+}

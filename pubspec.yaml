@@ -36,6 +36,10 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   flutter_bloc: ^8.1.2
+  intl: any
+  flutter_localization: ^0.1.10
+  calendar_date_picker2: ^0.4.5
+  faker: ^2.1.0
 
 dev_dependencies:
   flutter_test:
