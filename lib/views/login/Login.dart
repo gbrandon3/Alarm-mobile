@@ -1,3 +1,4 @@
+import 'package:alarm_movil/views/home/CentralWidget.dart';
 import 'package:alarm_movil/views/styles/style.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +21,9 @@ class Login extends StatelessWidget {
             Container(
               height: MediaQuery.of(context).size.height * 0.41,
               width: MediaQuery.of(context).size.width * 0.76,
-              color: Colors.black,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage("assets/Calendar-amico.png"))),
             ),
             Text(
               "BIENVENIDO",
@@ -34,15 +37,38 @@ class Login extends StatelessWidget {
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (BuildContext context) => Home()));
+                            builder: (BuildContext context) =>
+                                CentralWidget()));
                   },
                   style: botonStyle(),
-                  child: Text(
-                    "Login",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: MediaQuery.of(context).size.height * 0.027),
-                  ),
+                  child: Container(
+                      width: MediaQuery.of(context).size.width * 0.76,
+                      child: Stack(
+                        children: [
+                          Center(
+                              child: Text(
+                            "Login",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize:
+                                    MediaQuery.of(context).size.height * 0.027),
+                          )),
+                          Positioned(
+                              left: 0,
+                              top: MediaQuery.of(context).size.height *
+                                  0.07 *
+                                  0.2,
+                              child: Center(
+                                  child: Container(
+                                height: 30,
+                                width: 30,
+                                decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                            "assets/googlelogo.png"))),
+                              )))
+                        ],
+                      )),
                 ))
           ],
         ),

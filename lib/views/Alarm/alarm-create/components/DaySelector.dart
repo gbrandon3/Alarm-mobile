@@ -25,7 +25,14 @@ class DaySelectorState extends State<DaySelector> {
     super.initState();
     if (widget.date != "") {
       setState(() {
-        fecha = widget.date;
+        if (days.contains(widget.date[0])) {
+          daysSelected = [];
+          for (var i = 0; i < widget.date.length; i++) {
+            daysSelected.add(days.indexOf(widget.date[i]));
+          }
+        } else {
+          fecha = widget.date;
+        }
       });
     }
   }
@@ -114,10 +121,11 @@ class DaySelectorState extends State<DaySelector> {
           });
         } else {
           setState(() {
-            daysSelected.remove(indexF);
-            setState(() {
+            if (daysSelected.length != 1 && fecha == "Repetir cada") {
+              daysSelected.remove(indexF);
+
               fecha = "Repetir cada";
-            });
+            }
           });
         }
         BlocProvider.of<CreateAlarmBloc>(context).add(AddDay(daysSelected));

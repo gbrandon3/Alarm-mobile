@@ -9,7 +9,8 @@ part 'create_alarm_event.dart';
 part 'create_alarm_state.dart';
 
 class CreateAlarmBloc extends Bloc<CreateAlarmEvent, CreateAlarmState> {
-  CreateAlarmBloc(Alarm alarm) : super(CreateAlarmInitial(alarm: alarm)) {
+  CreateAlarmBloc(Alarm alarm, int index)
+      : super(CreateAlarmInitial(alarm: alarm, editing: index)) {
     on<CreateAlarmEvent>((event, emit) {
       // TODO: implement event handler
     });

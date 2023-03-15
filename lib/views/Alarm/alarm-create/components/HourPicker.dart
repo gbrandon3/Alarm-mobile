@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../bloc/create_alarm_bloc.dart';
 
 class HourPicker extends StatefulWidget {
+  String currentHour;
+  HourPicker({this.currentHour = ""});
   @override
   State<StatefulWidget> createState() {
     return HourPickerState();
@@ -99,6 +101,21 @@ class HourPickerState extends State<HourPicker> {
   @override
   void initState() {
     // TODO: implement initState
+    if (widget.currentHour != "") {
+      var currentHour = widget.currentHour.split(" ");
+      var mH = currentHour[0].split(":");
+      setState(() {
+        selectedHour = hour.indexOf(mH[0]);
+        selectedMinute = minutes.indexOf(mH[1]);
+        selectedTime = selectedHour <= 5
+            ? time1.indexOf(currentHour[1])
+            : time2.indexOf(currentHour[1]);
+        previousHour = selectedHour != 0 ? selectedHour - 1 : 11;
+        nextHour = selectedHour != 11 ? selectedHour + 1 : 0;
+        previousMinute = selectedMinute != 0 ? selectedMinute - 1 : 59;
+        nextMinute = selectedMinute != 59 ? selectedMinute + 1 : 0;
+      });
+    }
     super.initState();
   }
 

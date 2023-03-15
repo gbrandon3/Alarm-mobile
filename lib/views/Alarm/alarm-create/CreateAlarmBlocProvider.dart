@@ -8,13 +8,16 @@ import '../../../model/alarm.dart';
 
 class CreateAlarmBlocProvider extends StatelessWidget {
   Alarm alarm;
-  CreateAlarmBlocProvider({required this.alarm});
+  int index;
+  CreateAlarmBlocProvider({required this.alarm, this.index = -1});
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return BlocProvider(
-      create: (context) => CreateAlarmBloc(alarm),
-      child: CreateAlarmView(),
+      create: (context) => CreateAlarmBloc(alarm, index),
+      child: CreateAlarmView(
+        editAlarm: alarm.tipo != "" ? alarm : null,
+      ),
     );
   }
 }

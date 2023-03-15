@@ -1,12 +1,16 @@
 import 'package:alarm_movil/views/Alarm/alarm-detail/alarmDetail.dart';
 import 'package:alarm_movil/views/styles/style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../alarm_bloc/alarm_bloc.dart';
 import '../../../model/alarm.dart';
+import '../../Alarm/alarm-create/CreateAlarmBlocProvider.dart';
 
 class AlarmListItem extends StatelessWidget {
   Alarm alarma;
-  AlarmListItem({required this.alarma});
+  int index;
+  AlarmListItem({required this.alarma, required this.index});
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -32,7 +36,7 @@ class AlarmListItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
-                  flex: 3,
+                  flex: 4,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -57,14 +61,73 @@ class AlarmListItem extends StatelessWidget {
                     ],
                   )),
               Expanded(
-                  flex: 1,
+                  flex: 2,
                   child: Row(
                     children: [
                       Column(
                         mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Row(children: [Icon(Icons.delete), Icon(Icons.edit)])
+                          Row(children: [
+                            IconButton(
+                              icon: Icon(Icons.delete),
+                              onPressed: () {
+                                showDialog<void>(
+                                    context: context,
+                                    barrierDismissible:
+                                        false, // user must tap button!
+                                    builder: (BuildContext context2) {
+                                      return AlertDialog(
+                                        title: Text(
+                                          'Eliminar alarma',
+                                          style: TextStyle(color: primaryColor),
+                                        ),
+                                        content: SingleChildScrollView(
+                                          child: ListBody(
+                                            children: const <Widget>[
+                                              Text(
+                                                  'Seguro que deseas eliminar esta alarma'),
+                                            ],
+                                          ),
+                                        ),
+                                        actions: <Widget>[
+                                          TextButton(
+                                              onPressed: () {
+                                                BlocProvider.of<AlarmBloc>(
+                                                        context)
+                                                    .add(DeleteAlarm(
+                                                        index: index));
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: Text(
+                                                "Si",
+                                                style: TextStyle(fontSize: 18),
+                                              )),
+                                          TextButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: Text(
+                                                "No",
+                                                style: TextStyle(fontSize: 18),
+                                              ))
+                                        ],
+                                      );
+                                    });
+                              },
+                            ),
+                            IconButton(
+                              icon: Icon(Icons.edit),
+                              onPressed: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) =>
+                                        CreateAlarmBlocProvider(
+                                          alarm: alarma,
+                                          index: index,
+                                        )));
+                              },
+                            )
+                          ])
                         ],
                       )
                     ],

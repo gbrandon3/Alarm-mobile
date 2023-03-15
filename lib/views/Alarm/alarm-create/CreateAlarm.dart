@@ -12,8 +12,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:faker/faker.dart';
 import '../../../alarm_bloc/alarm_bloc.dart';
 import '../../../bloc/create_alarm_bloc.dart';
+import '../../../model/alarm.dart';
 
 class CreateAlarmView extends StatefulWidget {
+  Alarm? editAlarm;
+  CreateAlarmView({this.editAlarm});
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -32,7 +35,29 @@ class CreateAlarmViewState extends State<CreateAlarmView> {
   @override
   void initState() {
     // TODO: implement initState
+    if (widget.editAlarm != null) {
+      setState(() {
+        tipo = widget.editAlarm!.tipo;
+        if (tipo == "Evento") {
+          fecha.text = widget.editAlarm!.fecha.split(" ")[0];
+          lugar.text = widget.editAlarm!.lugar;
+        } else {
+          dateString = widget.editAlarm!.fecha.split(" ")[0];
+        }
+        nombre.text = widget.editAlarm!.nombre;
+        descripcion.text = widget.editAlarm!.descripcion;
+
+        compartido = widget.editAlarm!.contacts;
+      });
+    }
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+
+    super.dispose();
   }
 
   @override
@@ -43,13 +68,13 @@ class CreateAlarmViewState extends State<CreateAlarmView> {
         final currentState = state as CreateAlarmInitial;
         if (currentState.save) {
           BlocProvider.of<AlarmBloc>(context)
-              .add(SaveAlarm(currentState.alarm));
+              .add(SaveAlarm(currentState.alarm, currentState.editing));
           Navigator.of(context).pop();
         }
         if (currentState.alarm.tipo != this.tipo) {
           setState(() {
             this.tipo = currentState.alarm.tipo;
-            if (this.tipo == "Evento") {
+            if (this.tipo == "Evento" && this.lugar.text.isEmpty) {
               var datetime = DateTime.now();
               int dia = Random().nextInt(31);
               fecha.text =
@@ -98,7 +123,12 @@ class CreateAlarmViewState extends State<CreateAlarmView> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                HourPicker(),
+                HourPicker(
+                    currentHour: widget.editAlarm != null
+                        ? widget.editAlarm!.fecha.split(" ")[1] +
+                            " " +
+                            widget.editAlarm!.fecha.split(" ")[2]
+                        : ""),
                 const SizedBox(
                   height: 5,
                 ),
