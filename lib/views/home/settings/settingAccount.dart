@@ -22,7 +22,9 @@ class SettingAccount extends StatelessWidget {
               Container(
                 height: height * 0.3,
                 width: height * 0.3,
-                decoration: const BoxDecoration(color: Colors.red),
+                decoration: const BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage("assets/profile.png"))),
               ),
               const SizedBox(
                 height: 10,

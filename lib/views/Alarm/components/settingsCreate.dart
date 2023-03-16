@@ -233,7 +233,7 @@ class SettingsCreateState extends State<SettingsCreate> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text("Sonido"),
-              Row(children: [Text("Sonido 1"), Icon(Icons.chevron_right)])
+              Row(children: [Text("Sonido 1")])
             ],
           ))
         ],

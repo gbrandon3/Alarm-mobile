@@ -40,7 +40,7 @@ class TypeSelectorState extends State<TypeSelector> {
                 return StatefulBuilder(
                     builder: (context2, StateSetter setState) {
                   return Container(
-                    padding: EdgeInsets.only(top: 10),
+                    padding: EdgeInsets.only(top: 10, left: 10, right: 10),
                     height: 300,
                     child: Column(
                       children: [

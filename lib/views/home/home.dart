@@ -17,7 +17,7 @@ class Home extends StatelessWidget {
       builder: (context, state) {
         if (state is AlarmInitial ||
             state is AlarmLoaded && state.alarms.isEmpty) {
-          return NoAlarms();
+          return NoAlarms(firstTime: state is AlarmInitial);
         } else {
           final currentState = state as AlarmLoaded;
 

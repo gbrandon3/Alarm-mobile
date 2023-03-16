@@ -314,7 +314,7 @@ class HourPickerState extends State<HourPicker> {
 
   TextStyle selectedTimeStyle() {
     return const TextStyle(
-        color: Colors.black, fontSize: 18, fontWeight: FontWeight.w800);
+        color: Colors.black, fontSize: 16, fontWeight: FontWeight.w800);
   }
 
   TextStyle choiceTimeStyle() {

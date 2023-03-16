@@ -219,12 +219,21 @@ class CreateAlarmViewState extends State<CreateAlarmView> {
                         blurRadius: 4,
                         color: Colors.black.withOpacity(0.25))
                   ]),
-                  child: TextField(
-                    controller: descripcion,
-                    minLines: 3,
-                    maxLines: 3,
-                    decoration: inputDecoration("Descripcion"),
-                  ),
+                  child: GestureDetector(
+                      onTap: descripcion.text == ""
+                          ? () {
+                              setState(() {
+                                descripcion.text = "Descripción de la alarma";
+                              });
+                            }
+                          : null,
+                      child: TextField(
+                        controller: descripcion,
+                        minLines: 3,
+                        enabled: false,
+                        maxLines: 3,
+                        decoration: inputDecoration("Descripción"),
+                      )),
                 ),
                 const SizedBox(
                   height: 20,
