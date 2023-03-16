@@ -138,16 +138,18 @@ class AlarmListItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      IconButton(
-                          onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) =>
-                                    AlarmDetail(alarm: alarma)));
-                          },
-                          icon: Icon(
-                            Icons.chevron_right,
-                            size: 70,
-                          ))
+                      Container(
+                          margin: EdgeInsets.only(right: 2),
+                          child: IconButton(
+                              onPressed: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) =>
+                                        AlarmDetail(alarm: alarma)));
+                              },
+                              icon: Icon(
+                                Icons.chevron_right,
+                                size: 60,
+                              )))
                     ],
                   ))
             ],

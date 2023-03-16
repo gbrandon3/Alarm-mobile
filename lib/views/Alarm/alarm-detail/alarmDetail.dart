@@ -38,11 +38,13 @@ class AlarmDetail extends StatelessWidget {
               child: Column(
                 children: [
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
                         alarm.nombre,
                         style: alarmName(),
                       ),
+                      Switch(value: true, onChanged: (value) {})
                     ],
                   ),
                   SizedBox(
